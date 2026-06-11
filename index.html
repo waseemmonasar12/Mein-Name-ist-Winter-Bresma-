@@ -1,9 +1,12 @@
-
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
+    
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    
+   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta http-equiv="refresh" content="30">
+
     <title>نسمة شتاء</title>
     <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Aref+Ruqaa:wght@400;700&display=swap" rel="stylesheet">
     <style>
@@ -12,17 +15,20 @@
             padding: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(to bottom, #1a1025, #221b38, #0f172a);
+            /* خلفية داكنة ليلية شتوية */
+            background: radial-gradient(circle at center, #1f1426 0%, #0a0710 100%);
             font-family: 'Amiri', serif;
-            color: #333;
+            color: #e6d3d8;
             overflow: hidden;
         }
 
-        /* شاشة الدخول */
+        /* شاشة الدخول - تأثير الزجاج */
         #login-screen {
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: #1a1025;
+            background: rgba(10, 7, 16, 0.8);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -32,46 +38,66 @@
             text-align: center;
             padding: 20px;
             box-sizing: border-box;
-            transition: opacity 0.5s ease;
+            transition: opacity 0.8s ease;
+        }
+
+        .login-box {
+            background: rgba(42, 27, 51, 0.6);
+            padding: 40px;
+            border-radius: 20px;
+            border: 1px solid rgba(201, 138, 150, 0.3);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+            width: 85%;
+            max-width: 400px;
         }
 
         #login-screen h1 {
             font-family: 'Aref Ruqaa', serif;
-            font-size: 2.5rem;
-            color: #c98a96;
+            font-size: 2.8rem;
             margin-bottom: 30px;
+            background: linear-gradient(45deg, #e5b27e, #c98a96);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
         #login-screen input {
-            padding: 12px 20px;
+            padding: 15px;
             font-size: 1.2rem;
             font-family: 'Amiri', serif;
-            border: 2px solid #c98a96;
-            border-radius: 8px;
-            background: rgba(255,255,255,0.05);
-            color: white;
+            border: 2px solid #8c5a65;
+            border-radius: 10px;
+            background: rgba(0,0,0,0.3);
+            color: #fff;
             outline: none;
             text-align: center;
-            margin-bottom: 20px;
-            width: 80%;
-            max-width: 300px;
-        }
-
-        #login-screen button {
-            padding: 10px 40px;
-            font-size: 1.3rem;
-            font-family: 'Amiri', serif;
-            background: #c98a96;
-            color: #fff;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            font-weight: bold;
+            margin-bottom: 25px;
+            width: 90%;
             transition: 0.3s;
         }
 
+        #login-screen input:focus {
+            border-color: #e5b27e;
+            box-shadow: 0 0 15px rgba(229, 178, 126, 0.2);
+        }
+
+        #login-screen button {
+            padding: 12px 40px;
+            font-size: 1.3rem;
+            font-family: 'Amiri', serif;
+            background: linear-gradient(45deg, #8c5a65, #5c3842);
+            color: #fff;
+            border: 1px solid #c98a96;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+
         #login-screen button:hover {
-            background: #a86b77;
+            transform: translateY(-2px);
+            background: linear-gradient(45deg, #a86b77, #7a4b58);
+            box-shadow: 0 8px 20px rgba(201, 138, 150, 0.3);
         }
 
         #error-msg {
@@ -91,39 +117,45 @@
             position: relative;
         }
 
-        /* مؤثرات الثلج */
+        /* مؤثرات الثلج مع عمق بصري */
         .snowflake {
             position: absolute;
             top: -10px;
-            color: rgba(255, 235, 240, 0.8);
-            font-size: 1.2em;
+            color: #e8d5d8;
             user-select: none;
             z-index: 1000;
             pointer-events: none;
             animation-name: fall, shake;
             animation-iteration-count: infinite, infinite;
+            text-shadow: 0 0 5px rgba(255,255,255,0.3);
         }
+        /* جعل بعض الثلج ضبابي ليعطي شعور البعد 3D */
+        .snowflake:nth-child(even) {
+            filter: blur(2px);
+            z-index: 999;
+        }
+        
         @keyframes fall {
             0% { top: -10px; }
             100% { top: 100vh; }
         }
         @keyframes shake {
             0%, 100% { transform: translateX(0); }
-            50% { transform: translateX(20px); }
+            50% { transform: translateX(25px); }
         }
 
-        /* تصميم الكتاب المتجاوب */
+        /* تصميم الكتاب المتجاوب - داكن ومريح للقراءة */
         .book-container {
             position: relative;
             width: 90vw;
             max-width: 500px;
             height: 75vh;
             max-height: 700px;
-            background: #fffafa;
-            border-radius: 8px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+            background: #201524; /* لون ورق ليلي */
+            border-radius: 12px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.8), inset 0 0 30px rgba(0,0,0,0.5);
             overflow: hidden;
-            border-right: 12px solid #c98a96;
+            border-right: 15px solid #4a2c3a; /* كعب الكتاب داكن */
             margin-bottom: 60px;
         }
 
@@ -133,74 +165,80 @@
             right: 20px;
             font-family: 'Aref Ruqaa', serif;
             font-size: 1.5rem;
-            color: rgba(201, 138, 150, 0.4);
+            color: rgba(201, 138, 150, 0.15);
             user-select: none;
         }
 
         .logo-container {
-            width: 120px;
-            height: 120px;
-            border: 3px solid #c98a96;
+            width: 130px;
+            height: 130px;
+            border: 2px dashed #8c5a65;
             border-radius: 50%;
             display: flex;
             justify-content: center;
             align-items: center;
-            margin: 0 auto 20px auto;
-            background: rgba(201, 138, 150, 0.1);
-            box-shadow: inset 0 0 15px rgba(201, 138, 150, 0.2);
+            margin: 0 auto 25px auto;
+            background: rgba(30, 20, 35, 0.8);
+            box-shadow: 0 0 20px rgba(201, 138, 150, 0.1);
         }
+        
         .logo-text {
             font-family: 'Aref Ruqaa', serif;
-            font-size: 2.2rem;
-            color: #8c5a65;
-            transform: rotate(-10deg);
+            font-size: 2.4rem;
+            background: linear-gradient(to bottom, #e5b27e, #c98a96);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            transform: rotate(-5deg);
         }
 
         .page {
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
-            padding: 30px 20px;
+            padding: 30px 25px;
             box-sizing: border-box;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             text-align: center;
+            /* تأثير انتقال ناعم جداً */
             opacity: 0;
-            transform: translateX(-30px);
-            transition: all 0.5s ease;
+            transform: scale(0.95) translateY(20px);
+            transition: all 0.7s cubic-bezier(0.4, 0, 0.2, 1);
             visibility: hidden;
-            background-image: radial-gradient(circle at center, #ffffff 0%, #fdf2f4 100%);
+            background-image: radial-gradient(circle at center, #2a1b33 0%, #1e1425 100%);
         }
 
         .page.active {
             opacity: 1;
-            transform: translateX(0);
+            transform: scale(1) translateY(0);
             visibility: visible;
         }
 
         .title {
             font-family: 'Aref Ruqaa', serif;
             font-size: 2.2rem;
-            color: #4a2c3a;
+            color: #d8a0ab;
             margin-bottom: 15px;
+            text-shadow: 1px 1px 5px rgba(0,0,0,0.5);
         }
 
         .content {
-            font-size: 1.2rem;
-            line-height: 1.9;
-            color: #3b2f34;
-            font-weight: 700;
-            margin-bottom: 10px;
+            font-size: 1.25rem;
+            line-height: 2;
+            color: #d1b8c0;
+            font-weight: 400;
+            margin-bottom: 15px;
         }
 
         .poetry {
-            font-size: 1.35rem;
-            color: #7b4353;
+            font-size: 1.4rem;
+            color: #e5b27e; /* ذهبي ناعم للقصائد */
             margin: 15px 0;
-            line-height: 2.2;
+            line-height: 2.3;
             font-weight: bold;
             font-family: 'Aref Ruqaa', serif;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
         }
 
         .page-number {
@@ -209,7 +247,7 @@
             left: 50%;
             transform: translateX(-50%);
             font-size: 1rem;
-            color: #aaa;
+            color: #6a5360;
         }
 
         .controls {
@@ -218,7 +256,7 @@
             left: 50%;
             transform: translateX(-50%);
             display: flex;
-            gap: 15px;
+            gap: 20px;
             z-index: 10;
             width: 90vw;
             max-width: 500px;
@@ -226,26 +264,30 @@
         }
 
         .btn {
-            background: #c98a96;
-            color: #fff;
-            border: none;
-            padding: 12px 20px;
+            background: rgba(74, 44, 58, 0.8);
+            color: #e6d3d8;
+            border: 1px solid #8c5a65;
+            padding: 12px 25px;
             font-size: 1.1rem;
             font-family: 'Amiri', serif;
-            border-radius: 6px;
+            border-radius: 8px;
             cursor: pointer;
             flex: 1;
-            max-width: 150px;
-            transition: 0.3s;
+            max-width: 140px;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(5px);
         }
         
-        .btn:hover {
-            background: #b57a85;
+        .btn:hover:not(:disabled) {
+            background: rgba(140, 90, 101, 0.9);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.4);
         }
 
         .btn:disabled {
-            background: #5c474d;
-            color: #888;
+            background: rgba(30, 20, 30, 0.5);
+            border-color: #3b2f34;
+            color: #666;
             cursor: not-allowed;
         }
     </style>
@@ -254,10 +296,13 @@
 
     <!-- شاشة تسجيل الدخول -->
     <div id="login-screen">
-        <h1>نسمة شتاء</h1>
-        <input type="password" id="passwordInput" placeholder="أدخل كلمة السر هنا">
-        <button onclick="checkPassword()">دخول</button>
-        <p id="error-msg">كلمة السر غير صحيحة.</p>
+        <div class="login-box">
+            <h1>نسمة شتاء</h1>
+            <input type="password" id="passwordInput" placeholder="أدخل كلمة السر هنا">
+            <br>
+            <button onclick="checkPassword()">دخول</button>
+            <p id="error-msg">كلمة السر غير صحيحة.</p>
+        </div>
     </div>
 
     <!-- المحتوى الفعلي -->
@@ -271,13 +316,13 @@
                     <div class="logo-text">نسمة<br>شتاء</div>
                 </div>
                 <div class="title">إلى أختي التي لم تنجبها أمي</div>
-                <div class="content">إهداءٌ يليقُ بنقاءِ قلبكِ، وجمالِ روحكِ التي تُزهرُ في صحراءِ الأيام.</div>
+                <div class="content">إهداءٌ يليقُ بنقاءِ قلبكِ، وجمالِ روحكِ، ومقامكِ المحفوظ في صحائف الاحترام.</div>
                 <div class="page-number">1 / 30</div>
             </div>
             <!-- 2 -->
             <div class="page">
                 <div class="page-watermark">نسمة شتاء</div>
-                <div class="content">بعضُ الأرواحِ تُخلقُ من نور، لا تجمعنا بهم قرابةُ الدم، بل تربطنا بهم قرابةُ القلوب وصفاء النوايا. وأنتِ أولهم.</div>
+                <div class="content">بعضُ الأرواحِ تُخلقُ من نور، لا تجمعنا بهم قرابةُ الدم، بل تربطنا بهم قرابةُ القلوب وصفاء النوايا العالية. وأنتِ أولهم.</div>
                 <div class="page-number">2 / 30</div>
             </div>
             <!-- 3 -->
@@ -289,7 +334,7 @@
             <!-- 4 -->
             <div class="page">
                 <div class="page-watermark">نسمة شتاء</div>
-                <div class="content">أنتِ نسمةُ الشتاءِ التي لا تحملُ البرد، بل تحملُ غيثاً يغسلُ تعبَ الأيام ويُحيي في النفسِ الأمل.</div>
+                <div class="content">أنتِ نسمةُ الشتاءِ التي لا تحملُ البرد، بل تحملُ غيثاً يغسلُ تعبَ الأيام ويُحيي في النفسِ الأملَ بوجود الخير.</div>
                 <div class="page-number">4 / 30</div>
             </div>
             <!-- 5 -->
@@ -301,7 +346,7 @@
             <!-- 6 -->
             <div class="page">
                 <div class="page-watermark">نسمة شتاء</div>
-                <div class="content">في الشدائدِ تُعرفُ المعادن، ومعدنكِ أنقى من الذهب. صبركِ وتحملكِ للمشقة يُدرّس، وقوتكِ المغلفة بالرقة هي أعظم مزاياكِ.</div>
+                <div class="content">في الشدائدِ تُعرفُ المعادن الأصيلة، ومعدنكِ أنقى من الذهب. صبركِ وتحملكِ للمشقة يُدرّس، وقوتكِ المغلفة بالوقار هي أعظم مزاياكِ.</div>
                 <div class="page-number">6 / 30</div>
             </div>
             <!-- 7 -->
@@ -313,19 +358,19 @@
             <!-- 8 -->
             <div class="page">
                 <div class="page-watermark">نسمة شتاء</div>
-                <div class="content">كم من مرةٍ مالتْ بي الدُنيا، فكنتِ أنتِ الكتفَ الذي لا يُميل، واليدَ التي تنتشلني قبلَ السقوط.</div>
+                <div class="content">مواقفكِ النبيلة تقف شاهدة على أصالتك، كشجرةٍ طيبةٍ أصلها ثابت وتعطي بلا منّ ولا أذى، فاستحققتِ كل التقدير.</div>
                 <div class="page-number">8 / 30</div>
             </div>
             <!-- 9 -->
             <div class="page">
                 <div class="page-watermark">نسمة شتاء</div>
-                <div class="poetry">كَتِفٌ إِذا مالَتِ الأَيَّامُ أُسْنِدُها<br>وَظِلُّ عِزٍّ عَنِ الأَنْظارِ مَحْجوبِ</div>
+                <div class="poetry">في مَجْلِسِ الذِّكْرِ وَالأَخْلاقِ حاضِرَةٌ<br>طِيبُ الأُصولِ لَها ثَوْبٌ مِنَ الأَدَبِ</div>
                 <div class="page-number">9 / 30</div>
             </div>
             <!-- 10 -->
             <div class="page">
                 <div class="page-watermark">نسمة شتاء</div>
-                <div class="content">نقاءُ قلبكِ يشبهُ بياضَ الثلجِ في شتاءٍ هادئ، لا يحملُ حقداً ولا ضغينة، بل يفيضُ تسامحاً ونبلاً.</div>
+                <div class="content">نقاءُ قلبكِ يشبهُ بياضَ الثلجِ في شتاءٍ هادئ، لا يحملُ حقداً ولا ضغينة، بل يفيضُ تسامحاً ونبلاً يلحظه كل من عرفك.</div>
                 <div class="page-number">10 / 30</div>
             </div>
             <!-- 11 -->
@@ -337,31 +382,31 @@
             <!-- 12 -->
             <div class="page">
                 <div class="page-watermark">نسمة شتاء</div>
-                <div class="content">الأختُ ليست مجرد لقب، هي حصنٌ وملاذ. وأنتِ كنتِ دائماً الحصن الذي أودعُ فيه أسراري وأماني.</div>
+                <div class="content">الأخوةُ الراقية لا تُقاس بكثرة اللقاء ولا بكثرة الحديث، بل بصدق الدعوات ونبل المواقف. وأنتِ أثبتِّ أن النقاء لا يزال موجوداً.</div>
                 <div class="page-number">12 / 30</div>
             </div>
             <!-- 13 -->
             <div class="page">
                 <div class="page-watermark">نسمة شتاء</div>
-                <div class="poetry">يا أُخْتَ صِدْقٍ حَفِظْتِ السِّرَّ في ثِقَةٍ<br>كَالبَحْرِ يَكْتُمُ ما في قاعِهِ الصُّوبِ</div>
+                <div class="poetry">أُخْتٌ كَريمَةُ أَخْلاقٍ وَمَنْزِلَةٍ<br>كَالنَّجْمِ يَسْطَعُ في لَيْلٍ بِلا سُحُبِ</div>
                 <div class="page-number">13 / 30</div>
             </div>
             <!-- 14 -->
             <div class="page">
                 <div class="page-watermark">نسمة شتاء</div>
-                <div class="content">أعجَبُ دائماً من قدرتكِ على الابتسامِ وسط العواصف. تبثين الطمأنينة فيمن حولك وكأنكِ تملكين مفاتيح السكينة.</div>
+                <div class="content">حضوركِ الهادئ وحديثكِ المتزن يتركان أثراً طيباً، وكأنكِ تنثرين الاحترام أينما حللتِ، وتفرِضين التقدير بأخلاقكِ.</div>
                 <div class="page-number">14 / 30</div>
             </div>
             <!-- 15 -->
             <div class="page">
                 <div class="page-watermark">نسمة شتاء</div>
-                <div class="poetry">تَبَسَّمَتْ فَأَضاءَ الكَوْنُ مِنْ فَرَحٍ<br>وَأَشْرَقَ النُّورُ مِنْ بَيْنِ التَّجاعِيبِ</div>
+                <div class="poetry">يَفُوحُ مِنْ ذِكْرِها طِيبٌ وَمَكْرُمَةٌ<br>وَحُسْنُ سِيرَتِها يَسْرِي مَعَ الحِقَبِ</div>
                 <div class="page-number">15 / 30</div>
             </div>
             <!-- 16 -->
             <div class="page">
                 <div class="page-watermark">نسمة شتاء</div>
-                <div class="content">لو كُتبتْ قصائدُ المديحِ في حُسنِ الخلق، لكنتِ أنتِ مطلعَ القصيدةِ وختامها. لأنكِ تجمعين الأدب والحشمة والوقار.</div>
+                <div class="content">لو كُتبتْ قصائدُ المديحِ في حُسنِ الخلق، لكنتِ أنتِ مطلعَ القصيدةِ وختامها. لأنكِ تجمعين الحشمة، والرزانة، والوقار.</div>
                 <div class="page-number">16 / 30</div>
             </div>
             <!-- 17 -->
@@ -373,31 +418,31 @@
             <!-- 18 -->
             <div class="page">
                 <div class="page-watermark">نسمة شتاء</div>
-                <div class="content">نسمةُ الشتاءِ قد تكون باردة للبعض، لكنها بالنسبةِ لي هي النسيمُ الذي يوقظُ الروح، تماماً كما تفعلُ كلماتكِ الصادقة.</div>
+                <div class="content">نسمةُ الشتاءِ قد تكون باردة للبعض، لكنها بالنسبةِ لي هي النسيمُ النقي الذي يُذكّرني بأن الدنيا لا تزال بخير بوجود أمثالك.</div>
                 <div class="page-number">18 / 30</div>
             </div>
             <!-- 19 -->
             <div class="page">
                 <div class="page-watermark">نسمة شتاء</div>
-                <div class="poetry">تَنْسابُ كَالرُّوحِ في الأَبْدانِ كَلِمَتُها<br>فَتُبْرِئُ الجُرْحَ مِنْ غَيْرِ الأَطَبِّيبِ</div>
+                <div class="poetry">تَنْسابُ كَالرُّوحِ في الأَبْدانِ طاهِرَةً<br>فَتُبْرِئُ النَّفْسَ مِنْ هَمٍّ وَمِنْ تَعَبِ</div>
                 <div class="page-number">19 / 30</div>
             </div>
             <!-- 20 -->
             <div class="page">
                 <div class="page-watermark">نسمة شتاء</div>
-                <div class="content">لم نولد في نفسِ الدار، لكننا نسكنُ نفسَ القناعات والمبادئ. وهذا هو أعظم أنواعِ الانتماء.</div>
+                <div class="content">لم نولد في نفسِ الدار، لكننا نلتقي عند نفسِ القناعات، والمبادئ، واحترام الذات. وهذا هو أعظم أنواعِ الرقي الإنساني.</div>
                 <div class="page-number">20 / 30</div>
             </div>
             <!-- 21 -->
             <div class="page">
                 <div class="page-watermark">نسمة شتاء</div>
-                <div class="poetry">تَواصَلَتْ رُوحُنا في صِدْقِ مَقْصَدِها<br>بِلا خِداعٍ وَلا زَيْفٍ وَتَكْذِيبِ</div>
+                <div class="poetry">تَواصَلَتْ رُوحُنا في صِدْقِ مَقْصَدِها<br>عَلى النَّقاءِ بِلا زَيْفٍ وَتَكْذِيبِ</div>
                 <div class="page-number">21 / 30</div>
             </div>
             <!-- 22 -->
             <div class="page">
                 <div class="page-watermark">نسمة شتاء</div>
-                <div class="content">أفخرُ بكِ وبكل ما أنجزتِه، وبكل الصعاب التي تغلبتِ عليها بشموخ، وكأنكِ تخبرين الحياة أنكِ أكبر من كل تحدٍ.</div>
+                <div class="content">أفخرُ بكل الصعاب التي تغلبتِ عليها بشموخ، وكأنكِ تخبرين الحياة أنكِ أكبر من كل تحدٍ، وأن الكسر لا يعرف طريقاً إليكِ.</div>
                 <div class="page-number">22 / 30</div>
             </div>
             <!-- 23 -->
@@ -409,7 +454,7 @@
             <!-- 24 -->
             <div class="page">
                 <div class="page-watermark">نسمة شتاء</div>
-                <div class="content">أدعو الله في كل حين، أن يديمَ عليكِ هذا النقاء، وأن يجنبكِ كلَّ حزنٍ، فمثلكِ لا يليقُ به إلا الفرح.</div>
+                <div class="content">أدعو الله في كل حين، أن يديمَ عليكِ هذا النقاء، وأن يجنبكِ كلَّ حزنٍ، وأن يجعل أيامكِ القادمة بياضاً كبياض قلبك.</div>
                 <div class="page-number">24 / 30</div>
             </div>
             <!-- 25 -->
@@ -421,32 +466,32 @@
             <!-- 26 -->
             <div class="page">
                 <div class="page-watermark">نسمة شتاء</div>
-                <div class="content">أنتِ الهديةُ التي لم أطلبها، ولكن الله ساقها لي ليعوضني بها عن الكثير. نعمةٌ أحمد الله عليها.</div>
+                <div class="content">معرفةُ الأشخاصِ المخلصين في هذا الزمان رزق، وأنتِ رزقٌ ساقه الله ليعلمنا أن الأخوة لا تتطلب سوى قلبٍ نظيف وعقلٍ راجح.</div>
                 <div class="page-number">26 / 30</div>
             </div>
             <!-- 27 -->
             <div class="page">
                 <div class="page-watermark">نسمة شتاء</div>
-                <div class="poetry">هَدِيَّةُ اللهِ جاءَتْنِي بِلا طَلَبٍ<br>فَأَثْمَرَتْ في حَياتي أَطْيَبَ العِنَبِ</div>
+                <div class="poetry">رِزْقٌ مِنَ اللهِ في دُنْيا مُلَوَّثَةٍ<br>أَخْلاقُها كَشُعاعِ الشَّمْسِ في السُّحُبِ</div>
                 <div class="page-number">27 / 30</div>
             </div>
             <!-- 28 -->
             <div class="page">
                 <div class="page-watermark">نسمة شتاء</div>
-                <div class="content">ستبقين دائماً أختي، ومستشارتي، والقلب الذي ألجأ إليه. أكتب لكِ هذا لأوثق عهداً لا يفنى.</div>
+                <div class="content">ستبقين دائماً في مكانةٍ عالية، أختٌ أعتز بها، ومثالٌ للرقي أذكره بالخير، وأدعو لها في ظهر الغيب بما يليق بصفائها.</div>
                 <div class="page-number">28 / 30</div>
             </div>
             <!-- 29 -->
             <div class="page">
                 <div class="page-watermark">نسمة شتاء</div>
-                <div class="poetry">عَهْدٌ عَلَيَّ أُخَيَّتِي مَدى عُمُري<br>أَنْ نَبْقَى كَالرُّوحِ في صِدْقٍ وَفي حَسَبِ</div>
+                <div class="poetry">عَهْدٌ عَلَيَّ أُخَيَّتِي مَدى عُمُري<br>أَنْ أَحْفَظَ الوُدَّ في حَلٍّ وَمُغْتَرَبِ</div>
                 <div class="page-number">29 / 30</div>
             </div>
             <!-- 30 -->
             <div class="page">
                 <div class="page-watermark">نسمة شتاء</div>
                 <div class="title" style="font-size: 2rem;">ختاماً</div>
-                <div class="content">تنتهي صفحاتُ هذا الكتاب هنا...<br>ولكن صفحات احترامي ومودتي لكِ لا نهاية لها.<br>دُمتِ لي أختي التي لم تنجبها أمي، ودامت "نسمة شتاء" تهبّ بالخير.</div>
+                <div class="content">تنتهي صفحاتُ هذا الكتاب هنا...<br>ولكن صفحات احترامي ومودتي الأخوية لكِ لا نهاية لها.<br>دُمتِ بخير، ودامت "نسمة شتاء" تهبّ بالنقاء.</div>
                 <div class="page-number">30 / 30</div>
             </div>
         </div>
@@ -458,26 +503,23 @@
     </div>
 
     <script>
-        // التحقق من كلمة السر (معدل ليكون أكثر ذكاءً)
+        // التحقق من كلمة السر
         function checkPassword() {
-            // أخذ القيمة وإزالة أي مسافات زائدة من البداية أو النهاية
             let pass = document.getElementById('passwordInput').value.trim();
             const errorMsg = document.getElementById('error-msg');
             
-            // السماح بالكلمة سواء كتبت بالهاء أو التاء المربوطة
             if (pass === "نسمة شتاء" || pass === "نسمه شتاء") {
                 document.getElementById('login-screen').style.opacity = '0';
                 setTimeout(() => {
                     document.getElementById('login-screen').style.display = 'none';
                     document.getElementById('main-content').style.display = 'flex';
-                    createSnowflakes(); // تشغيل الثلج بعد الدخول
-                }, 500);
+                    createSnowflakes(); 
+                }, 800);
             } else {
                 errorMsg.style.display = 'block';
             }
         }
 
-        // إمكانية الضغط على Enter للدخول
         document.getElementById("passwordInput").addEventListener("keypress", function(event) {
             if (event.key === "Enter") {
                 event.preventDefault();
@@ -520,24 +562,25 @@
             }
         }
 
-        // الثلج (رقيق وأنثوي)
+        // الثلج (بتأثيرات 3D ناعمة)
         function createSnowflakes() {
             const container = document.getElementById('main-content');
-            const snowflakesCount = 35;
+            const snowflakesCount = 40;
             for (let i = 0; i < snowflakesCount; i++) {
                 let snowflake = document.createElement('div');
                 snowflake.className = 'snowflake';
                 snowflake.innerHTML = '❄';
                 
-                let size = Math.random() * 0.8 + 0.5;
+                let size = Math.random() * 0.8 + 0.4;
                 let left = Math.random() * 100;
-                let duration = Math.random() * 5 + 7;
+                let duration = Math.random() * 6 + 8; // حركة أبطأ وأهدأ
                 let delay = Math.random() * 5;
 
                 snowflake.style.fontSize = size + 'em';
                 snowflake.style.left = left + 'vw';
                 snowflake.style.animationDuration = duration + 's, 4s';
                 snowflake.style.animationDelay = delay + 's, ' + delay + 's';
+                snowflake.style.opacity = Math.random() * 0.7 + 0.3;
 
                 container.appendChild(snowflake);
             }
